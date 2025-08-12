@@ -1,5 +1,6 @@
-# Exercises from the Book "R For Data Science (Wickham, Grolemund"
-# Chapter 01
+# Exercises from the Book "R For Data Science" (Wickham, Grolemund)
+# Chapter 01 - Exercise 01
+# #GGplots #ContinuousVariables #CategoricalVariables #Aesthetics
 
 # I'll do the exercises with the following layout
 # The questions will have one hastag "#"
@@ -75,4 +76,15 @@ ggplot(data = mpg) +
 # 5. What does the stroke aesthetic do? 
 #    What shapes does it work with? 
 #    (Hint: use ?geom_point.)
+### The aesthetic stroke allows to set a fixed size for all points of the scatterplot
+### It requires numeric arguments like 1, 2, 3, 4, 5
 ?geom_point
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy), stroke = 1)
+
+# 6. What happens if you map an aesthetic to something other than a variable name, like aes(color = displ < 5)?
+### This is interesting! It recognised the conditions and adjusted the coloring to it.
+### All points meeting the condition have an own color and TRUE written in the legend.
+### All points not meeting the condition have an own color and FALSE written in the legend.
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = displ < 5))
