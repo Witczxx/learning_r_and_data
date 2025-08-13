@@ -1,6 +1,6 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
 # Chapter 01 - Exercise 03
-# #CreatingPlots #geom_smooth() #show.legend= #GGplotSyntax
+# #CreatingPlots #geom_smooth() #Legends #Syntax
 
 # 1. What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
 ### I would use geom_line() or geom_smooth or 
@@ -66,3 +66,17 @@ ggplot(data = mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   geom_smooth(mapping=aes(group = drv), se = FALSE)
 ### Plot 03
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+  geom_point() + 
+  geom_smooth(se = FALSE)
+### Plot 4
+ggplot(data = mpg, aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(color = drv)) + 
+  geom_smooth(se = FALSE)
+### Plot 5
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = drv)) + 
+  geom_smooth(se = FALSE, aes(linetype = drv))
+### Plot 6
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(shape = 21, aes(fill = drv), color = "white", size = 3, stroke = 2)
