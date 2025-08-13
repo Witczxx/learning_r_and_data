@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 01 - Exercise 03
+# Chapter 03 - Exercise 03
 # #CreatingPlots #geom_smooth() #Legends #Syntax
 
 # 1. What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?

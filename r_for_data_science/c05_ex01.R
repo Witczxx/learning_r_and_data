@@ -1,6 +1,6 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 02 - Exercise 02
-# #dplyr #VarliableTypes #filter() #arrange() #mutate() #select() #rize() #group_by() #near() #is.na(x) #Operators
+# Chapter 05 - Exercise 01
+# #dplyr #VarliableTypes #filter() #is.na(x) #Operators
 
 # 1. Find all flights that: 
 data(flights) View(flights) ?flights
@@ -11,7 +11,7 @@ filter(flights, dest == "IAH" | dest == "HOU")
 #    c. Were operated by United, American, or Delta
 filter(flights, carrier == "US")
 #    d. Departed in summer (July, August, and September) 
-filter(flights, month %in% c(6, 7, 8))
+filter(flights, month %in% c(7, 8, 9))
 #    e. Arrived more than two hours late, but didn’t leave late 
 filter(flights, dep_delay >= 0 & arr_delay >= 120)
 #    f. Were delayed by at least an hour, but made up over 30 minutes in flight
