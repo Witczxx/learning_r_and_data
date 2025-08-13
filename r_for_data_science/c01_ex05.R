@@ -1,7 +1,6 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
 # Chapter 01 - Exercise 05
-# #Position:Identity/Fill/Dodge/Jitter #aes(Color/Fill) #
-
+# #Position:Identity/Fill/Dodge/Jitter #aes(Color/Fill) #geom_boxplot #geom_count #geom_jitter
 
 # 1. What is the problem with this plot? 
 #    How could you improve it? 

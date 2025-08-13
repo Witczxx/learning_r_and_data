@@ -1,6 +1,6 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
 # Chapter 01 - Exercise 06
-# #coord_flip() #
+# #coord_flip() #Pie-Chart #geom_abline() #coord_fixed() #labs() #coord_polar(theta = "y")
 
 # Pie Chart Example
 ggplot(data = diamonds) + 
