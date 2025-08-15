@@ -34,6 +34,9 @@ select(flights, contains("TIME"))
 select(flights, TIME)
 select(flights, contains("TIME"), ignore.case = FALSE)
 ?select() ?contains()
+
+
+
 # Notes I took while reading
 library(nycflights13) 
 library(tidyverse)
@@ -52,7 +55,7 @@ contains("ijk")      # contain “ijk”
 matches("(.)\\1")    # match a regular expression
 num_range("x", 1:3)  # matches x1, x2, x3.
 # select() can rename variables, but not used, cause drops all other variables not expl. mentioned
-# rename() is used, it keeps all other variables not explicitly mentiooned. It's a variation of select()
+# rename() is used, it keeps all other variables not explicitly mentioned. It's a variation of select()
 rename(flights, tail_num = tailnum)
 # everything() helps to move variables to the start of the data frame
 select(flights, time_hour, air_time, everything())

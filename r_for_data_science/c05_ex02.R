@@ -24,6 +24,8 @@ View(arrange(flights, air_time))
 View(arrange(flights, distance))
 View(arrange(flights, desc(distance)))
 
+
+
 # Notes I took while reading
 library(nycflights13) library(tidyverse)
 data(flights) View(flights)
