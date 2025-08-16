@@ -23,16 +23,3 @@ View(arrange(flights, air_time))
 # Shortest: 17 miles // Longest: 4983 miles
 View(arrange(flights, distance))
 View(arrange(flights, desc(distance)))
-
-
-
-# Notes I took while reading
-library(nycflights13) library(tidyverse)
-data(flights) View(flights)
-# Arranging with several columns 
-arrange(flights, year, month, day)
-# Descending Order
-arrange(flights, desc(arr_delay))
-# Missing values always at the end
-df <-tibble(x = c(5, 2, NA)) 
-arrange(df, x)
