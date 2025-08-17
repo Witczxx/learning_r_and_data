@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 05 - Notes 03
+# Chapter 03 - Notes 03
 # #select() #HelperFunctions #starts_with() #ends_with() #contains() #all_of() #any_of() #ignore.case= #rename() #everything()
 
 library(nycflights13) 

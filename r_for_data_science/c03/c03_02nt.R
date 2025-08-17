@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 05 - Notes 02
+# Chapter 03 - Notes 02
 # #arrange() #desc() 
 
 library(nycflights13) library(tidyverse)

@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 03 - Exercise 04
+# Chapter 01 - Exercise 04
 # #BarCharts #Geoms&Stats #GeomPairs/GeomConcerts #Proportions
 
 # 1. What is the default geom associated with stat_summary()? 

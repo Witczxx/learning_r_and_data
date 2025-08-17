@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 05 - Exercise 02
+# Chapter 03 - Exercise 02
 # #arrange() #desc() 
 
 # 1. How could you use arrange() to sort all missing values to the start? 

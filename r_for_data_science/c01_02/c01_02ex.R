@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 03 - Exercise 02
+# Chapter 01 - Exercise 02
 # #Facets #facet_wrap #facet_grid
 
 # 1. What happens if you facet on a continuous variable?

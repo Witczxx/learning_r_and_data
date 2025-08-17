@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 05 - Notes 01
+# Chapter 03 - Notes 01
 # #dplyr #VarliableTypes #filter() #is.na(x) #Operators
 
 install.packages("nycflights13")

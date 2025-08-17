@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 05 - Exercise 04
+# Chapter 03 - Exercise 04
 # #mutate() #HowToAddColumns #transmute() 
 # #ModularArithmetics #%/% #%% 
 # #log() #lag() #lead()

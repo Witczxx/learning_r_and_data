@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 03 - Exercise 01
+# Chapter 01 - Exercise 01
 # #GGplots #ContinuousVariables #CategoricalVariables #Aesthetics
 
 # I'll do the exercises with the following layout

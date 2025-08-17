@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 04 - Exercise 01
+# Chapter 02 - Exercise 01
 # #Mistakes #Errors #Recognising #HelpCommand
 
 # 1. Why does this code not work? 

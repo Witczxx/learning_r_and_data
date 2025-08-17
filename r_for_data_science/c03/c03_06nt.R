@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 05 - Notes 06
+# Chapter 03 - Notes 06
 # #Group&Filter #Group&Mutate #GroupedFilters #WindowFunctions
 
 library(nycflights13) 

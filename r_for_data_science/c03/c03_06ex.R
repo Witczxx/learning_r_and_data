@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 05 - Exercise 06
+# Chapter 03 - Exercise 06
 # #Group&Filter #Group&Mutate #GroupedFilters #WindowFunctions
 
 # 1. Refer back to the table of useful mutate and filtering functions. 

@@ -1,5 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
-# Chapter 05 - Notes 05
+# Chapter 03 - Notes 05
 # #summarize() #GroupedSummaries #Pipes #na.rm() #n() #median() #MeasuresOfSpread #MeasuresOfPosition
 # #GroupingMultipleVariables #ungroup()
 
