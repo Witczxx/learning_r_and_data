@@ -54,7 +54,7 @@ ggplot() +
 # 6. 6. Re-create the R code necessary to generate the following graphs.
 ### Adding Screenshot 
 library(magick)
-c01_ex03_pic01 <- image_read("screenshots/c01_ex03_pic01.png")
+c01_ex03_pic01 <- image_read("screenshots/c01_03ex_pic01.png")
 print(c01_ex03_pic01)
 ### Plot 01
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
