@@ -1,6 +1,5 @@
 # Exercises from the Book "R For Data Science" (Wickham, Grolemund)
 # Chapter 05 - Note 06
-# #
 
 library(tidyverse)
 library(nycflights13)
