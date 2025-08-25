@@ -3,5 +3,153 @@ title: "R For Data Science - Chapter 07"
 author: "Patrick Witczak"
 date: "2025-08-25"
 format: html
+toc: true
+toc-depth: 4
 ---
+
+
+# Exercises from the Book "R For Data Science" (Wickham, Grolemund)
+
+```{r}
+library(tidyverse)
+```
+
+# Data Import With ReadR (Notes)
+
+- read_csv() reads comma-delimited files
+- read_csv2() reads semicolon-separated files (common in countries where , is used as the decimal place)
+- read_tsv() reads tab-delimited files
+- read_delim() reads in files with any delimiter
+- read_fwf() reads fixed-width files
+- specify fields either by their widths with fwf_widths() 
+- or their position with fwf_positions()
+- read_table() reads a common variation of fixed-width files where columns are separated by white space. 
+- read_log() reads Apache style log files. 
+- also check out webreadr, which is built on top of read_log() and provides many more helpful tools.
+
+Clasical Import:
+```{r, eval = FALSE}
+heights <-read_csv("data/heights.csv")
+```
+
+Supplying Inline CSV Files:
+```{r, eval = FALSE}
+read_csv("a,b,c 1,2,3 4,5,6")
+```
+
+Use skip = n to skip the first n lines.
+Use comment = "#" to drop all lines starting with an "#"
+```{r, eval = FALSE}
+read_csv("The first line of metadata The second line of metadata x,y,z 1,2,3", skip = 2)
+read_csv("# A comment I want to skip x,y,z 1,2,3", comment = "#")
+```
+
+col_names = FALSE - tells the function that there are no headers.
+\n is a shortcut to add a new line.
+```{r, eval = FALSE}
+read_csv("1,2,3\n4,5,6", col_names = FALSE)
+```
+
+Or you create col_names directly:
+```{r, eval = FALSE}
+read_csv("1,2,3\n4,5,6", col_names = c("x", "y", "z"))
+```
+
+na tells R, what exactly represents missing values:
+```{r, eval = FALSE}
+read_csv("a,b,c\n1,2,.", na = ".")
+```
+
+**Why are we using read_csv() instead of read.csv() form BaseR ?**
+Because it is 10x faster!!! 
+data.table::fread() is even faster, makes tibbles, but doesn't fit into tidyverse.
+
+# Data Import With ReadR (Exercises)
+
+## Exercise 01 
+
+**What function would you use to read a file where fields are separated with “|”?**
+
+I would use read_delim() : 
+```{r, eval = FALSE}
+read_delim("file/path.csv", delim = "|"))
+```
+
+## Exercise 02
+
+**Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?**
+
+- col_names and col_types are used to specify the column names and how to parse the columns
+- locale is important for determining things like the encoding and whether “.” or “,” is used as a decimal mark.
+- na and quoted_na control which strings are treated as missing values when parsing vectors
+- trim_ws trims whitespace before and after cells before parsing
+- n_max sets how many rows to read
+- guess_max sets how many rows to use when guessing the column type
+- progress determines whether a progress bar is shown.
+
+In fact, the two functions have the exact same arguments:
+```{r, eval = FALSE}
+intersect(names(formals(read_csv)), names(formals(read_tsv)))
+identical(names(formals(read_csv)), names(formals(read_tsv)))
+```
+
+## Exercise 03
+
+ **What are the most important arguments to read_fwf()?**
+
+The most important argument to read_fwf() which reads “fixed-width formats”, 
+is col_positions which tells the function where data columns begin and end.
+
+```{r, eval = FALSE}
+read_fwf(fwf_sample, fwf_positions(c(1, 30), c(20, 42), c("name", "ssn")))
+```
+
+## Exercise 04
+
+ <b>Sometimes strings in a CSV file contain commas.
+    To prevent them from causing problems they need to be surrounded by a quoting character, like " or '. 
+    By convention, read_csv() assumes that the quoting character will be ", 
+    and if you want to change it you’ll need to use read_delim() instead. 
+    What arguments do you need to specify to read the following text into a data frame? "x,y\n1,'a,b'" </b>
+
+```{r}
+read_delim("x,y\n1,'a,b'", ",", quote = "'")
+```
+
+## Exercise 05
+
+<b>Identify what is wrong with each of the following inline CSV files.
+   What happens when you run the code?</b>
+
+
+**Nr 01 - read_csv("a,b\n1,2,3\n4,5,6")**
+
+There are only 2 header columns. The third column is being dropped.
+   ```{r}
+read_csv("a,b\n1,2,3\n4,5,6")
+   ```
+
+There are three columns recognised. In the first row there is a missing value.
+In the second row the numbers 3 and 4 are put together, becuase there's no fourth header column.
+   ```{r}
+read_csv("a,b,c\n1,2\n1,2,3,4")
+   ```
+
+There are 2 header columns, but only 1 row. A number as a string. 
+The second backslash is making the row beign dropped.
+   ```{r}
+read_csv("a,b\n\"1") 
+   ```
+
+The opening quote "1 is dropped because it is not closed, and a is treated as an integer.
+   ```{r}
+read_csv("a,b\n1,2\na,b") 
+   ```
+
+read_csv doesn't recognise ";" , it must be read_csv2
+   ```{r}
+read_csv("a;b\n1;3")
+   ```
+
+# Parsing A Vector
 

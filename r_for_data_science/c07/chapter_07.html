@@ -104,10 +104,37 @@ window.Quarto = {
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercises-from-the-book-r-for-data-science-wickham-grolemund" id="toc-exercises-from-the-book-r-for-data-science-wickham-grolemund" class="nav-link active" data-scroll-target="#exercises-from-the-book-r-for-data-science-wickham-grolemund">Exercises from the Book “R For Data Science” (Wickham, Grolemund)</a>
+  <ul>
+  <li><a href="#hastags" id="toc-hastags" class="nav-link" data-scroll-target="#hastags">Hastags</a></li>
+  <li><a href="#tibbles-with-tibble-notes" id="toc-tibbles-with-tibble-notes" class="nav-link" data-scroll-target="#tibbles-with-tibble-notes">Tibbles with Tibble (Notes)</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#tribbles" id="toc-tribbles" class="nav-link" data-scroll-target="#tribbles">Tribbles</a></li>
+  <li><a href="#more-tibble-features" id="toc-more-tibble-features" class="nav-link" data-scroll-target="#more-tibble-features">More Tibble Features</a></li>
+  <li><a href="#interacting-with-older-code" id="toc-interacting-with-older-code" class="nav-link" data-scroll-target="#interacting-with-older-code">Interacting with older code</a></li>
+  </ul></li>
+  <li><a href="#tibbles-with-tibble-exercises" id="toc-tibbles-with-tibble-exercises" class="nav-link" data-scroll-target="#tibbles-with-tibble-exercises">Tibbles with Tibble (Exercises)</a>
+  <ul class="collapse">
+  <li><a href="#how-can-you-tell-if-an-object-is-a-tibble" id="toc-how-can-you-tell-if-an-object-is-a-tibble" class="nav-link" data-scroll-target="#how-can-you-tell-if-an-object-is-a-tibble">1. How can you tell if an object is a tibble?</a></li>
+  <li><a href="#compare-and-contrast-the-following-operations-on-a-data.frame-and-equivalent-tibble." id="toc-compare-and-contrast-the-following-operations-on-a-data.frame-and-equivalent-tibble." class="nav-link" data-scroll-target="#compare-and-contrast-the-following-operations-on-a-data.frame-and-equivalent-tibble.">2. Compare and contrast the following operations on a data.frame and equivalent tibble.</a></li>
+  <li><a href="#if-you-have-the-name-of-a-variable-stored-in-an-object-e.g.-var---mpg." id="toc-if-you-have-the-name-of-a-variable-stored-in-an-object-e.g.-var---mpg." class="nav-link" data-scroll-target="#if-you-have-the-name-of-a-variable-stored-in-an-object-e.g.-var---mpg.">3. If you have the name of a variable stored in an object, e.g., var &lt;- “mpg”.</a></li>
+  <li><a href="#practice-referring-to-nonsyntactic-names-in-the-following-data-frame-by" id="toc-practice-referring-to-nonsyntactic-names-in-the-following-data-frame-by" class="nav-link" data-scroll-target="#practice-referring-to-nonsyntactic-names-in-the-following-data-frame-by">4. Practice referring to nonsyntactic names in the following data frame by:</a></li>
+  <li><a href="#what-does-tibbleenframe-do" id="toc-what-does-tibbleenframe-do" class="nav-link" data-scroll-target="#what-does-tibbleenframe-do">5. What does tibble::enframe() do?</a></li>
+  <li><a href="#what-option-controls-how-many-additional-column-names-are-printed-at-the-footer-of-a-tibble" id="toc-what-option-controls-how-many-additional-column-names-are-printed-at-the-footer-of-a-tibble" class="nav-link" data-scroll-target="#what-option-controls-how-many-additional-column-names-are-printed-at-the-footer-of-a-tibble">6. What option controls how many additional column names are printed at the footer of a tibble?</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -247,16 +274,16 @@ window.Quarto = {
 <pre><code># A tibble: 1,000 × 5
    a                   b              c      d e    
    &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1 2025-08-25 11:19:53 2025-09-12     1 0.525  x    
- 2 2025-08-24 23:35:22 2025-09-07     2 0.0634 d    
- 3 2025-08-25 14:02:26 2025-09-17     3 0.0883 h    
- 4 2025-08-25 01:35:08 2025-09-05     4 0.435  p    
- 5 2025-08-25 10:35:29 2025-08-24     5 0.246  q    
- 6 2025-08-25 12:44:49 2025-09-01     6 0.544  s    
- 7 2025-08-25 07:03:01 2025-09-04     7 0.274  a    
- 8 2025-08-25 14:55:44 2025-09-05     8 0.794  h    
- 9 2025-08-24 23:24:58 2025-09-12     9 0.588  z    
-10 2025-08-25 20:15:47 2025-09-20    10 0.842  h    
+ 1 2025-08-25 09:21:31 2025-09-11     1 0.310  d    
+ 2 2025-08-25 06:41:14 2025-09-13     2 0.967  u    
+ 3 2025-08-25 11:39:40 2025-09-18     3 0.463  y    
+ 4 2025-08-25 20:34:34 2025-09-11     4 0.259  l    
+ 5 2025-08-25 15:37:52 2025-09-11     5 0.545  w    
+ 6 2025-08-25 03:33:24 2025-08-27     6 0.160  n    
+ 7 2025-08-25 07:41:07 2025-09-22     7 0.421  c    
+ 8 2025-08-25 21:49:39 2025-08-30     8 0.0645 m    
+ 9 2025-08-25 14:02:05 2025-09-04     9 0.976  e    
+10 2025-08-25 19:45:07 2025-09-12    10 0.690  s    
 # ℹ 990 more rows</code></pre>
 </div>
 </div>
@@ -324,16 +351,16 @@ window.Quarto = {
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract by name </span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.92602922 0.06870528 0.80351118 0.81701381 0.22784613</code></pre>
+<pre><code>[1] 0.1269709 0.9734543 0.4102720 0.6771637 0.2740783</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"x"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.92602922 0.06870528 0.80351118 0.81701381 0.22784613</code></pre>
+<pre><code>[1] 0.1269709 0.9734543 0.4102720 0.6771637 0.2740783</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract by position </span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.92602922 0.06870528 0.80351118 0.81701381 0.22784613</code></pre>
+<pre><code>[1] 0.1269709 0.9734543 0.4102720 0.6771637 0.2740783</code></pre>
 </div>
 </div>
 <p>When working in pipes, we need special placeholder:</p>
@@ -341,11 +368,11 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    .<span class="sc">$</span>x </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.92602922 0.06870528 0.80351118 0.81701381 0.22784613</code></pre>
+<pre><code>[1] 0.1269709 0.9734543 0.4102720 0.6771637 0.2740783</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span> .[[<span class="st">"x"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.92602922 0.06870528 0.80351118 0.81701381 0.22784613</code></pre>
+<pre><code>[1] 0.1269709 0.9734543 0.4102720 0.6771637 0.2740783</code></pre>
 </div>
 </div>
 </section>
@@ -503,16 +530,16 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></
 <pre><code># A tibble: 10 × 3
      one   two three
    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1     1  2.07  2.07
- 2     2  3.81  1.90
- 3     3  6.56  2.19
- 4     4  7.52  1.88
- 5     5  8.91  1.78
- 6     6 11.4   1.89
- 7     7 13.3   1.90
- 8     8 16.0   2.00
- 9     9 17.0   1.89
-10    10 20.9   2.09</code></pre>
+ 1     1  2.68  2.68
+ 2     2  4.51  2.26
+ 3     3  6.46  2.15
+ 4     4  8.28  2.07
+ 5     5  9.94  1.99
+ 6     6 13.2   2.20
+ 7     7 14.7   2.10
+ 8     8 14.5   1.81
+ 9     9 18.3   2.03
+10    10 19.4   1.94</code></pre>
 </div>
 </div>
 </section>
