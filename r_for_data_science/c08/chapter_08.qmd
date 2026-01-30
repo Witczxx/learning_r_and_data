@@ -12,6 +12,7 @@ toc-depth: 4
 
 ```{r}
 library(tidyverse)
+library(hms)
 ```
 
 # Data Import With ReadR (Notes)
@@ -151,5 +152,201 @@ read_csv doesn't recognise ";" , it must be read_csv2
 read_csv("a;b\n1;3")
    ```
 
-# Parsing A Vector
+# Parsing A Vector (Notes)
+
+## Introduction
+
+These functions take a character vector and return a more specialized vector like a logical, integer, or date:
+If parsing fails, you’ll get a warning. And the failures will be missing in the output.
+If there are many parsing failures, you’ll need to use problems() to get the complete set.
+If there are many parsing failures, you’ll need to use problems() to get the complete set. 
+This returns a tibble, which you can then manipulate with dplyr:
+
+```{r}
+str(parse_logical(c("TRUE", "FALSE", "NA")))
+str(parse_integer(c("1", "2", "3")))
+str(parse_date(c("2010-01-01", "1979-10-14")))
+parse_integer(c("1", "231", ".", "456"), na = ".") # na: how to treat missing values
+parse_integer(c("123", "345", "abc", "123.45")) # Warning message
+problems(parse_integer(c("123", "345", "abc", "123.45"))) # Returns Tibble to manipulate
+```
+
+## 9 important parser functions
+
+parse_logical()
+parse_integer() 
+parse_double() is a strict numeric parser
+parse_number() is a flexible numeric parser
+parse_character()  
+parse_factor() categorical variables with fixed and known values
+parse_datetime()
+parse_date()
+parse_time() allow you to parse various date and time specifications
+
+## Numbers
+
+There are several problems that might occur
++ People write numbers differently in different parts of the world
++ Numbers are often surrounded by other characters that provide some context, like “$1000” or “10%”.
++ Numbers often contain “grouping” characters to make them easier to read, like “1,000,000”.
+
+When parsing numbers, the most important option is the character you use for the decimal mark. 
+Readr’s default locale is US-centric, because generally R is US-centric
+You can override the default value of . by creating a new locale and setting the decimal_mark argument:
+
+```{r}
+parse_double("1.23")
+parse_double("1,23", locale = locale(decimal_mark = ","))
+```
+
+parse_number() ignores non-numeric characters before and after the number. 
+This is useful for currencies and percentages, but also works to extract numbers embedded in text:
+
+```{r}
+parse_number("$100")
+parse_number("20%")
+parse_number("20%")
+```
+
+The final problem is addressed by the combination of parse_number() 
+and the locale as parse_number() will ignore the “grouping mark”:
+```{r}
+parse_number("$123,456,789")
+parse_number( "123.456.789", locale = locale(grouping_mark = ".") )
+parse_number( "123'456'789", locale = locale(grouping_mark = "'") )
+```
+
+## Strings
+
+Each character on the keyboard belongs to a hexadecimal number.
+Nowadays UTF-8 has unified all characters of human, even emojis.
+But older files might not use UTF-8, and hexadecimal numbers might be different.
+If you need to fix this one day, you can use the following arguments:
+
+```{r}
+x1 <-"El Ni\xf1o was particularly bad this year" 
+x2 <-"\x82\xb1\x82\xf1\x82\xc9\x82\xbf\x82\xcd"
+parse_character(x1, locale = locale(encoding = "Latin1"))
+parse_character(x2, locale = locale(encoding = "Shift-JIS"))
+```
+
+Readr provides guess_encoding() to help you figure it out, which encoding is correct.
+Sometimes you might not know the correct encoding:
+
+```{r}
+guess_encoding(charToRaw(x1))
+guess_encoding(charToRaw(x2))
+```
+
+## Factors
+
+R uses factors to represent categorical variables that have a known set of possible values. 
+Give parse_factor() a vector of known levels to generate a warning whenever an unexpected value is present:
+
+But if you have many problematic entries, it’s often easier to leave them as character vectors 
+and then use the tools you’ll learn about in
+
+```{r}
+fruit <-c("apple", "banana")
+parse_factor(c("apple", "banana", "bananana"), levels = fruit)
+```
+
+## Date, Date-Times and Times
+
+You pick between three parsers depending on whether you want 
+   a date (the number of days since 1970-01-01), 
+   a date-time (the num‐ ber of seconds since midnight 1970-01-01), 
+   or a time (the number of seconds since midnight).
+
+parse_datetime() expects an ISO8601 date-time (most important!) :
+parse_date() expects a four-digit year, a - or /, the month, a - or /, then the day:
+parse_time() expects the hour, :, minutes, optionally : and seconds, and an optional a.m./p.m. specifier:
+
+```{r}
+# You need to activate library(hms) -> I put it to the beginning
+parse_datetime("2010-10-01T2010")
+parse_date("2010-10-01")
+parse_time("01:10 am")
+parse_time("20:10:01")
+```
+
+If these defaults don’t work for your data you can supply your own date-time format, 
+built up of the following pieces:
+**Year** 
+   %Y (4 digits). 
+   %y (2 digits; 00-69 → 2000-2069, 70-99 → 1970-1999). 
+**Month**
+   %m (2 digits). 
+   %b (abbreviated name, like “Jan”). 
+   %B (full name, “January”). 
+**Day**
+   %d (2 digits). 
+   %e (optional leading space).
+**Time**
+   %H (0-23 hour format). 
+   %I (0-12, must be used with %p). 
+   %p (a.m./p.m. indicator). 
+   %M (minutes). 
+   %S (integer seconds). 
+   %OS (real seconds). 
+   %Z (time zone [a name, e.g., America/Chicago]).
+   %z (as offset from UTC, e.g., +0800).
+**Nondigits**
+   %. (skips one nondigit character). 
+   %* (skips any number of nondigits).
+
+The best way to figure out the correct format is to create a few examples in a character vector, 
+and test with one of the parsing functions. For example:
+
+```{r}
+parse_date("01/02/15", "%m/%d/%y")
+parse_date("01/02/15", "%d/%m/%y")
+parse_date("01/02/15", "%y/%m/%d")
+```
+
+If you’re using %b or %B with non-English month names, 
+you’ll need to set the lang argument to locale(). 
+See the list of built-in languages in date_names_langs(), 
+or if your language is not already included, create your own with date_names():
+
+```{r}
+parse_date("1 janvier 2015", "%d %B %Y", locale = locale("fr"))
+```
+
+# Parsing A Vector (Exercises)
+
+## Exercise 01 
+What are the most important arguments to locale()?
+
+## Exercise 02 
+What happens if you try and set decimal_mark and group ing_mark to the same character? 
+What happens to the default value of grouping_mark when you set decimal_mark to ",“? 
+What happens to the default value of decimal_mark when you set the grouping_mark to ".“?
+
+## Exercise 03 
+I didn’t discuss the date_format and time_format options to locale(). 
+What do they do? 
+Construct an example that shows when they might be useful.
+
+## Exercise 04 
+If you live outside the US, create a new locale object 
+that encapsulates the settings for the types of files you read most commonly.
+
+## Exercise 05 
+What’s the difference between read_csv() and read_csv2()?
+
+## Exercise 06 
+What are the most common encodings used in Europe? 
+What are the most common encodings used in Asia? 
+Do some googling to find out.
+
+## Exercise 07 
+Generate the correct format string to parse each of the following dates and times: 
+d1 <-"January 1, 2010" 
+d2 <-"2015-Mar-07" 
+d3 <-"06-Jun-2017" 
+d4 <-c("August 19 (2015)", "July 1 (2015)") 
+d5 <-"12/30/14" # Dec 30, 2014 
+t1 <-"1705" 
+t2 <-"11:15:10.12 PM"
 
